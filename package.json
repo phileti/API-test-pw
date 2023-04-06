@@ -1,7 +1,7 @@
 {
-  "name": "api-test",
+  "name": "api-test-pw",
   "version": "1.0.0",
-  "description": "tests de l'API prox tags",
+  "description": "tests de l'API proxy tags",
   "main": "index.js",
   "scripts": {},
   "keywords": [],

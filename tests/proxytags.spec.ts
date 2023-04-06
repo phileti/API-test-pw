@@ -8,8 +8,8 @@ test.describe("Récupération des tags d'un utilisateur", () => {
   const codesite: string = "of";
   const mail: string = "no-reply@ouest-france.fr";
   let last_update: string = "0";
-  
-    test("Premier appel", async ({ request }) => {
+
+  test("Premier appel", async ({ request }) => {
     const tags = await request.get(`/user/${codesite}/${mail}/${last_update}`);
     expect(tags.ok()).toBeTruthy();
     expect(tags.status()).toBe(200);
@@ -25,12 +25,12 @@ test.describe("Récupération des tags d'un utilisateur", () => {
 
 test.describe("Cas d'erreur", () => {
   test("Site inconnu", async ({ request }) => {
-    const tags = await request.get('/user/ofr/no-reply@ouest-france.fr');
+    const tags = await request.get("/user/ofr/no-reply@ouest-france.fr");
     expect(tags.status()).toBe(403);
   });
 
   test("Utilisateur inconnu", async ({ request }) => {
-    const tags = await request.get('/user/of/toto@ouest-france.fr');
+    const tags = await request.get("/user/of/toto@ouest-france.fr");
     expect(tags.status()).toBe(404);
   });
 });
