@@ -9,15 +9,6 @@ test.describe("Récupération des tags d'un utilisateur", () => {
   const mail: string = "no-reply@ouest-france.fr";
   let last_update: string = "0";
   
-  test("Site inconnu", async ({ request }) => {
-    const tags = await request.get(`/user/ofr/${mail}`);
-    expect(tags.status()).toBe(403);
-  });
-
-  test("Utilisateur inconnu", async ({ request }) => {
-    const tags = await request.get(`/user/${codesite}/toto@ouest-france.fr`);
-    expect(tags.status()).toBe(404);
-  });
     test("Premier appel", async ({ request }) => {
     const tags = await request.get(`/user/${codesite}/${mail}/${last_update}`);
     expect(tags.ok()).toBeTruthy();
@@ -30,5 +21,16 @@ test.describe("Récupération des tags d'un utilisateur", () => {
     const tags = await request.get(`/user/${codesite}/${mail}/${last_update}`);
     expect(tags.status()).toBe(304);
   });
+});
 
+test.describe("Cas d'erreur", () => {
+  test("Site inconnu", async ({ request }) => {
+    const tags = await request.get('/user/ofr/no-reply@ouest-france.fr');
+    expect(tags.status()).toBe(403);
+  });
+
+  test("Utilisateur inconnu", async ({ request }) => {
+    const tags = await request.get('/user/of/toto@ouest-france.fr');
+    expect(tags.status()).toBe(404);
+  });
 });
